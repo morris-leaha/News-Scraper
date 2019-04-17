@@ -25,9 +25,18 @@ app.set("view engine", "handlebars");
 
 // ============ CONNECT MONGO DB ============
 
-mongoose.connect("mongodb://localhost/news-scraper")
+mongoose.connect("mongodb://localhost/news-scraper", { useNewUrlParser: true });
 
 // ================= ROUTES =================
+
+app.get("/scrape", function (req, res) {
+    axios.get("https://www.buzzfeed.com/").then(function(response) {
+        var $ = cheerio.load(response.data);
+
+
+    });
+});
+
 
 
 // ============= LISTENER INFO ==============
