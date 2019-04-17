@@ -7,6 +7,8 @@ var NoteSchema = new Schema ({
     body: String
 });
 
+// Create model via mongoose's model method
+// Store in variable to export 
 var Note = mongoose.model("Note", NoteSchema);
 
 module.exports = Note;
