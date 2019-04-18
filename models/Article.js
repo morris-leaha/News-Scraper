@@ -5,12 +5,35 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema ({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        validate: [
+            function(input) {
+                return input.length >= 1;
+            },
+            "Title must be longer than 1 character"
+        ]
     }, 
     link: {
         type: String, 
-        required: true
+        required: true,
+        validate: [
+            function(input) {
+                return input.length >= 1;
+            },
+            "Link must be longer than 1 character"
+        ]
     }, 
+    summary: {
+        type: String, 
+        required: true,
+        validate: [
+            function(input) {
+                return input.length >= 1;
+            },
+            "Summary must be longer than 1 character"
+        ]
+    },
     note: {
         // Store the Note id
         type: Schema.Types.ObjectId,
