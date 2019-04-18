@@ -4,7 +4,7 @@ var db = require("../models");
 
 
 module.exports = function (app) {
-    // SCRAPING ROUTE
+    // SCRAPING ARTICLES ROUTE
     app.get("/scrape", function (req, res) {
         axios.get("https://www.washingtonpost.com/consumer-tech/?utm_term=.efd689cecdc2").then(function (response) {
     
@@ -32,7 +32,7 @@ module.exports = function (app) {
             });
     
             // Send a message to client 
-            res.json("Articles have been scraped!");
+            res.send("Articles have been scraped!");
 
         });
     });
@@ -41,6 +41,36 @@ module.exports = function (app) {
     app.get("/articles", function (req, res) {
         db.Article.find({}).then(function (dbArticle) {
             // Send all articles back to client 
+            res.json(dbArticle);
+        }).catch(function (err) {
+            // If error, send message to client
+            res.json(err);
+        });
+    });
+
+    // CLEAR ALL ARTICLES ROUTE
+    app.post("/clear", function (req, res) {
+        db.Article.remove({saved: false}, function (dbArticle) {
+            res.json(dbArticle);
+        }).catch(function (err) {
+            // If error, send message to client
+            res.json(err);
+        });
+    });
+
+    // SAVE ARTICLE ROUTE
+    app.put("/saved/:id", function (req, res) {
+        db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
+            res.json(dbArticle);
+        }).catch(function (err) {
+            // If error, send message to client
+            res.json(err);
+        });
+    });
+
+    // UNSAVE ARTICLE ROUTE
+    app.put("/unsaved/:id", function (req, res) {
+        db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
             res.json(dbArticle);
         }).catch(function (err) {
             // If error, send message to client

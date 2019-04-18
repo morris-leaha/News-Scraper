@@ -6,6 +6,7 @@ var ArticleSchema = new Schema ({
     title: {
         type: String,
         required: true,
+        // Do not save duplicate entries
         unique: true,
         validate: [
             function(input) {
@@ -33,6 +34,10 @@ var ArticleSchema = new Schema ({
             },
             "Summary must be longer than 1 character"
         ]
+    },
+    saved: {
+        type: Boolean,
+        default: false
     },
     note: {
         // Store the Note id

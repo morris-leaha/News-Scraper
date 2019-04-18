@@ -40,7 +40,7 @@
             {{#each articles}}
             <div class="row">
                 <div class="col justify-content-center">
-                    <div class="articles">
+                    <div id="articles">
                         <div class="card shadow mb-4">
                             <div class="card-header">
                                 <a href={{this.link}} class="h5 inline-block" target="_blank">{{this.title}}</a>
@@ -56,21 +56,3 @@
             {{/each}}
         </div>
     </main>
-
-    <footer class="footer sticky-footer mt-5">
-        <div class="container text-center">
-            <!-- FOOTER 'NAV' -->
-            <div class="row footer-nav">
-                <div class="col mt-2 mb-1">
-                    <a href="https://github.com/morris-leaha/News-Scraper" class="footer-links"><i
-                            class="fab fa-github fa-lg"></i></a>
-                </div>
-            </div>
-            <!-- FOOTER COPYRIGHT -->
-            <div class="row">
-                <div class="col">
-                    <span>Copyright &copy; 2019</span>
-                </div>
-            </div>
-        </div>
-    </footer>
